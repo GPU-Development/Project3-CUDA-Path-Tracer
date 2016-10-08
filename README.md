@@ -1,16 +1,4 @@
-
-<style type="text/css">
-<!--
-.center {margin: auto;display: block;}
-.tg  {border-collapse:collapse;border-spacing:0;border-color:#999;width:400px;margin: auto;display: block;}
-.tg td{font-family:Arial, sans-serif;font-size:14px;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#444;background-color:#F7FDFA;}
-.tg th{font-family:Arial, sans-serif;font-size:14px;font-weight:normal;padding:10px 5px;border-style:solid;border-width:0px;overflow:hidden;word-break:normal;border-color:#999;color:#fff;background-color:#26ADE4;}
-.tg .tg-baqh{text-align:center;vertical-align:top}
-.tg .tg-amwm{font-weight:bold;text-align:center;vertical-align:top}
-.tg .tg-9ewa{color:#fe0000;text-align:center;vertical-align:top}
--->
-</style>
-
+<link rel="stylesheet" type="text/css" href="./style.css">
 
 CUDA Path Tracer
 ================
