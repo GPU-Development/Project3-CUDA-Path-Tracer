@@ -14,7 +14,8 @@ enum GeomType {
 
 struct Ray {
     glm::vec3 origin;
-    glm::vec3 direction;
+	glm::vec3 direction;
+	int indexOfRefraction;
 };
 
 struct Geom {
@@ -61,7 +62,7 @@ struct RenderState {
 
 struct PathSegment {
 	Ray ray;
-  glm::vec3 color;
+    glm::vec3 color;
 	int pixelIndex;
 	int remainingBounces;
 };
@@ -78,4 +79,26 @@ struct ShadeableIntersection {
   float t;
   glm::vec3 surfaceNormal;
   int materialId;
+  bool outside;
+};
+
+struct TerminateRay {
+	__host__ __device__
+	bool operator()(const PathSegment p) {
+		return p.remainingBounces > 0;
+	}
+};
+
+struct MaterialCmp {
+	__host__ __device__
+	bool operator()(const ShadeableIntersection p, const ShadeableIntersection q) {
+		return p.materialId < q.materialId;
+	}
+};
+
+struct IsLight {
+	__host__ __device__
+	bool operator()(const Material g) {
+		return g.emittance > 0.0f;
+	}
 };
