@@ -1,5 +1,6 @@
 #define _CRT_SECURE_NO_DEPRECATE
 #include <ctime>
+#include <chrono>
 #include "main.h"
 #include "preview.h"
 
@@ -169,9 +170,19 @@ bool init() {
 }
 
 void mainLoop() {
+	std::chrono::time_point<std::chrono::system_clock> start;
+	float dur;
+	float avg = 0.0f;
+	int i = 0;
     while (!glfwWindowShouldClose(window)) {
         glfwPollEvents();
-        runCuda();
+
+		i++;
+		start = std::chrono::system_clock::now();
+		runCuda();
+		dur = (std::chrono::duration_cast<std::chrono::milliseconds> (std::chrono::system_clock::now() - start)).count();
+		avg += dur;
+		printf("Average time: %f\n", avg/i);
 
         string title = "CIS565 Path Tracer | " + utilityCore::convertIntToString(iteration) + " Iterations";
         glfwSetWindowTitle(window, title.c_str());
@@ -185,6 +196,8 @@ void mainLoop() {
         glDrawElements(GL_TRIANGLES, 6,  GL_UNSIGNED_SHORT, 0);
         glfwSwapBuffers(window);
     }
+	float time = (std::chrono::system_clock::now() - start).count();
+
     glfwDestroyWindow(window);
     glfwTerminate();
 }

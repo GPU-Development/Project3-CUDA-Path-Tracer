@@ -21,9 +21,10 @@
 
 
 #define SORT_BY_MATERIAL 0
-#define CACHE_FIRST_BOUNCE 1
+#define CACHE_FIRST_BOUNCE 0
 #define ANTIALIASING 1
 #define CUSTOM_COMPACT 0
+#define THRUST_COMPACT 0
 #define DIRECT_LIGHTING 1
 
 #define BLOCK_SIZE 128
@@ -663,7 +664,13 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 
 		num_paths = remainingPaths;
 		cudaFree(dev_out);
-#else
+#else 
+		int remainingPaths = thrust::count_if(path_ptr, path_ptr + num_paths, TerminateRay());
+		num_paths = (remainingPaths <= 0) ? 0 : pixelcount;
+#endif
+
+#if THRUST_COMPACT
+
 		// ray compaction with thrust
 		thrust::partition(path_ptr, path_ptr + num_paths, TerminateRay());
 		num_paths_final = num_paths;

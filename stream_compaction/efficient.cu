@@ -198,7 +198,7 @@ int compact_dev(int n, int *dev_out, const int *dev_in) {
 	cudaFree(dev_bools);
 	cudaFree(dev_indices);
 
-	return rtn + 1;
+	return rtn;
 }
 
 
