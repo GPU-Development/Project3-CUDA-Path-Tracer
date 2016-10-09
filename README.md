@@ -114,7 +114,7 @@ resulting in similar computiations for what is not normally a discrete parameter
 ray direction in the initial ray cast into the scene within the boundary of one pixel. In this case, we again used a uniform distribution within each individual
 pixel, resulting in significant edge smoothing without the need to post process the image after the path tracer completes. Below shows the before and after
 
-<img src="img/AA_compare.png" width="600" alt="anti-aliasing closeup" style="margin: auto;display: block;">
+<img src="img/AA_compare.PNG" width="600" alt="anti-aliasing closeup" style="margin: auto;display: block;">
 <center>**Anti-aliasing to noticeably smooth edge of black object**</center>
 
 
@@ -123,17 +123,20 @@ Another major limitation of the standard path tracing algorithm is that if a ray
 accurately reflect the lighting conditions of the scene. The simplest approach to this is add a final step that terminates all rays by doing a final bounce to a
 random point in a random emissive source in the scene. Without any additonal light bouncing, we can see the direct lighting alone can produce accurate shadows 
 and does a good job at providing crude lighting to the scene:
+
 <img src="img/direct.png" width="400" alt="Direct lighting effect"  style="margin: auto;display: block;">
 <center>**Direct lighting only**</center>
 
 Once added as a final step of the standard depth 8 path tracer, we can now get significantly improved lighting for the scene in the same number of iterations
 show below (left is with direct lighting).
+
 <img src="img/direct_lighting.png" width="600" alt="Depth-8 then DL" style="margin: auto;display: block;">
 <center>**Final pass to add direct lighting (Left: direct lighting on. Right: reflected light only.)**</center>
 
 Researching direct lighting online provided conflicting information on implementations. One of the ideas when computing direct lighting for a ray tracer instead
 of a path tracer is to only compute direct lighting for the first bounce simillarly to the demo image, but then add that to the final path traced image. Unfortunately
 this implementation resulted in significant blowout of the light sources and did not have the desired effect:
+
 <img src="img/single_bounce_direct_lighting.png" width="600" alt="Depth-8 plus DL" style="margin: auto;display: block;">
 <center>**Single pass direct lighting added directly to indirect render**</center>
 
