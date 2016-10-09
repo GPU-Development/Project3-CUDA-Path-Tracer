@@ -688,29 +688,6 @@ void pathtrace(uchar4 *pbo, int frame, int iter) {
 #if DIRECT_LIGHTING
 	// Direct Lighting
 	num_paths = pixelcount;
-	//generateRayFromCamera << <blocksPerGrid2d, blockSize2d >> >(cam, iter, 8, dev_paths);
-
-	//pathTraceOneBounce << <numBlocksPixels, blockSize1d >> > (
-	//	0
-	//	, num_paths
-	//	, dev_paths
-	//	, dev_geoms
-	//	, hst_scene->geoms.size()
-	//	, dev_intersections
-	//	);
-	//cudaDeviceSynchronize();
-	//checkCUDAError("first object direct lighting");
-
-	//shadeMaterialSimple << <numBlocksPixels, blockSize1d >> > (
-	//	iter,
-	//	traceDepth,
-	//	num_paths,
-	//	dev_intersections,
-	//	dev_paths,
-	//	dev_materials
-	//	);
-	//cudaDeviceSynchronize();
-	//checkCUDAError("shade direct lighting");
 
 	directLighting << <numBlocksPixels, blockSize1d >> > (
 		iter,
