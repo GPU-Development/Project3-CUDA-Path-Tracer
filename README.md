@@ -94,6 +94,7 @@ The second major physics improvement was to add light refraction for entering an
 physics class know that light will bend slightly when entering a new material based off of its index of refraction according to 
 [Snell's Law](https://en.wikipedia.org/wiki/Snell%27s_law). Here, we can see a simulation of a simulation of a blue tinted window with internel reflection 
 on the edges:
+
 <img src="img/working_refraction.png" width="600" alt="Refraction no-fresnel" style="margin: auto;display: block;">
 <center>**Light refraction with internal reflection**</center>
 
